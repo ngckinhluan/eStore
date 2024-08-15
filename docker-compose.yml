@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  api:
+    image: ${DOCKER_REGISTRY-}api
+    container_name: estore.api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    ports:
+    - "5000:5000"
+    - "5001:5001"
+
+  estore.database:
+    image: postgres:lastest
+    container_name: estore.database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: estore
+    ports: 
+      - "5432:5432"
+    volumes:
+      - ${APPDATA}/PostgreSQL:/var/lib/postgresql/data:ro
