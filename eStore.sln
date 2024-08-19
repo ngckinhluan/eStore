@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{2DADEC25-6F4F-49C9-87FE-A30D7910743B}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{54383AED-1648-4F49-9696-F2B861E9DB5A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{AB8D4464-267E-42E2-8605-21BB0F9D4FCE}"
 EndProject
 Global
@@ -43,10 +41,6 @@ Global
 		{2DADEC25-6F4F-49C9-87FE-A30D7910743B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DADEC25-6F4F-49C9-87FE-A30D7910743B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DADEC25-6F4F-49C9-87FE-A30D7910743B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54383AED-1648-4F49-9696-F2B861E9DB5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54383AED-1648-4F49-9696-F2B861E9DB5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54383AED-1648-4F49-9696-F2B861E9DB5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54383AED-1648-4F49-9696-F2B861E9DB5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB8D4464-267E-42E2-8605-21BB0F9D4FCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB8D4464-267E-42E2-8605-21BB0F9D4FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB8D4464-267E-42E2-8605-21BB0F9D4FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
