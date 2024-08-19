@@ -70,6 +70,6 @@ public class MemberController(IMemberService memberService, IMapper mapper) : Co
         {
             return NotFound("Member not found");
         }
-        return Ok("Member has been deleted");
+        return NoContent();
     }
 }
