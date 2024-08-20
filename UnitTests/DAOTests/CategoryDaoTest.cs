@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace UnitTests.DAOsTests
+namespace UnitTests.DAOTests
 {
     public class CategoryDaoTest
     {

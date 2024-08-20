@@ -4,7 +4,7 @@ using DAOs;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace UnitTests.DAOsTests;
+namespace UnitTests.DAOTests;
 
 public class OrderDaoTest
 {
