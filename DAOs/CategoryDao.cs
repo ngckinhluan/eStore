@@ -31,7 +31,7 @@ public class CategoryDao(ApplicationDbContext context)
         if (existingCategory == null) return null;
         existingCategory.CategoryName = category.CategoryName;
         await Context.SaveChangesAsync();
-        return existingCategory;
+        return existingCategory;    
     }
 
 

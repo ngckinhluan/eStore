@@ -32,8 +32,13 @@
     <ItemGroup>
       <ProjectReference Include="..\BusinessObjects\BusinessObjects.csproj" />
       <ProjectReference Include="..\DAOs\DAOs.csproj" />
+      <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
       <ProjectReference Include="..\Repositories\Repositories.csproj" />
       <ProjectReference Include="..\Services\Services.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="MiddleWare\" />
     </ItemGroup>
 
 </Project>

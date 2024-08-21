@@ -2,9 +2,12 @@ using System.Text;
 using BusinessObjects.Context;
 using BusinessObjects.Entities;
 using DAOs;
+using eStore.Extensions;
+using LoggerService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using NLog;
 using Repositories.Implementation;
 using Repositories.Interface;
 using Services.Implementation;
@@ -17,6 +20,7 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
         // Add services to the container.
         builder.Services.AddAuthorization();
@@ -24,13 +28,16 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        
+        builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
         ConfigurationManager configuration = builder.Configuration;
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
         {
             var connectionString = configuration.GetConnectionString("eStore");
             options.UseNpgsql(connectionString);
         });
+        
+        // Add logging
+        builder.Logging.AddConsole();
 
         #region JWT Authenthication
         builder.Services.AddAuthentication(options =>
@@ -107,6 +114,8 @@ public class Program
 
         var app = builder.Build();
         // Configure the HTTP request pipeline.
+        var logger = app.Services.GetRequiredService<ILoggerManager>();
+        app.ConfigureExceptionHandler(logger);
         #region Swagger
         app.UseSwagger();
         app.UseSwaggerUI(c =>

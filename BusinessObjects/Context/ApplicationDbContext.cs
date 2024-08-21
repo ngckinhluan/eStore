@@ -35,7 +35,7 @@ public class ApplicationDbContext : DbContext
     {
         optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=estore;Username=postgres;Password=12345");
     }
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Primary keys

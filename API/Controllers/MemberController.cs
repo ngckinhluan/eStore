@@ -42,7 +42,6 @@ public class MemberController(IMemberService memberService, IMapper mapper) : Co
     [HttpPost]
     public async Task<IActionResult> AddMember([FromBody] MemberRequestDto member)
     {
-        var entity = Mapper.Map<Member>(member);
         var result = await MemberService.AddAsync(member);
         if (result == null)
         {

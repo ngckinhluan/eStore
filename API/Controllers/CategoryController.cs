@@ -2,58 +2,85 @@
 using BusinessObjects.DTOs.Request;
 using BusinessObjects.DTOs.Response;
 using BusinessObjects.Entities;
+using LoggerService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Services.Interface;
 
 namespace eStore.Controllers;
 
 [Route("api/category")]
 [ApiController]
-public class CategoryController(ICategoryService categoryService, IMapper mapper) : ControllerBase
+public class CategoryController(ICategoryService categoryService, IMapper mapper, ILoggerManager logger)
+    : ControllerBase
 {
-    private ICategoryService CategoryService { get; } = categoryService;
-    private IMapper Mapper { get; } = mapper;
-
     [HttpGet]
-    public async Task<IActionResult> GetCategories()
+    public async Task<IActionResult> GetAllCategories()
     {
-        var result = await CategoryService.GetAllAsync();
+        try
+        {
+            var result = await categoryService.GetAllAsync();
+            logger.LogInfo($"Return all categories from database");
+            var response = mapper.Map<IEnumerable<CategoryResponseDto>>(result);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError($"Something went wrong inside GetAllCategories action: {ex.Message}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    [HttpGet("{id}", Name = "GetCategoryById")]
+    public async Task<IActionResult> GetCategoryById(int id)
+    {
+        var result = await categoryService.GetByIdAsync(id);
         if (result == null)
         {
-            return NotFound();
+            logger.LogError($"Category with id: {id} was not found in the database.");
+            return NotFound(new { message = "Category not found" });
         }
-        var response = Mapper.Map<IEnumerable<CategoryResponseDto>>(result);
+
+        var response = mapper.Map<CategoryResponseDto>(result);
         return Ok(response);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetCategoryById(int id)
-    {
-        var result = await CategoryService.GetByIdAsync(id);
-        if (result == null)
-        {
-            return NotFound(new { message = "Category not found" });
-        }
-        var response = Mapper.Map<CategoryResponseDto>(result);
-        return Ok(result);
-    }
-
     [HttpPost]
-    public async Task<IActionResult> AddCategory([FromBody] CategoryRequestDto category)
+    public async Task<IActionResult> CreateCategory([FromBody] CategoryRequestDto category)
     {
-        var result = await CategoryService.AddAsync(category);
-        if (result == null)
+        try
         {
-            return BadRequest(new { message = "Failed to add category" });
-        }
+            if (category == null)
+            {
+                logger.LogError("Category object sent from client is null.");
+                return BadRequest("Category object is null");
+            }
 
-        return Ok(result);
+            if (!ModelState.IsValid)
+            {
+                logger.LogError("Invalid category object sent from client.");
+                return BadRequest("Invalid model object");
+            }
+            // var categoryEntity = mapper.Map<Category>(category);
+            await categoryService.AddAsync(category);
+            return CreatedAtRoute("GetCategoryById", new { name = category.CategoryName }, category);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError($"Something went wrong inside CreateCategory action: {ex.Message}");
+            return StatusCode(500, "Internal server error");
+        }
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryRequestDto category)
     {
-        var result = await CategoryService.UpdateAsync(id, category);
+        if (category == null || id <= 0)
+        {
+            return BadRequest(new { message = "Invalid category data" });
+        }
+
+        var result = await categoryService.UpdateAsync(id, category);
         if (result == null)
         {
             return BadRequest(new { message = "Failed to update category" });
@@ -65,12 +92,12 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCategory(int id)
     {
-        var result = await CategoryService.DeleteAsync(id);
+        var result = await categoryService.DeleteAsync(id);
         if (result == 0)
         {
             return NotFound(new { message = "Category not found" });
         }
+
         return Ok(new { message = "Category has been deleted" });
     }
-
 }
