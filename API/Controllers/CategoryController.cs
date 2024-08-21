@@ -7,14 +7,14 @@ using Services.Interface;
 
 namespace eStore.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/category")]
 [ApiController]
 public class CategoryController(ICategoryService categoryService, IMapper mapper) : ControllerBase
 {
     private ICategoryService CategoryService { get; } = categoryService;
     private IMapper Mapper { get; } = mapper;
 
-    [HttpGet("GetCategories")]
+    [HttpGet]
     public async Task<IActionResult> GetCategories()
     {
         var result = await CategoryService.GetAllAsync();
@@ -26,7 +26,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
         return Ok(response);
     }
 
-    [HttpGet("GetCategoryById/{id}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetCategoryById(int id)
     {
         var result = await CategoryService.GetByIdAsync(id);
@@ -38,7 +38,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
         return Ok(result);
     }
 
-    [HttpPost("AddCategory")]
+    [HttpPost]
     public async Task<IActionResult> AddCategory([FromBody] CategoryRequestDto category)
     {
         var result = await CategoryService.AddAsync(category);
@@ -50,7 +50,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
         return Ok(result);
     }
 
-    [HttpPut("UpdateCategory/{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateCategory(int id, [FromBody] CategoryRequestDto category)
     {
         var result = await CategoryService.UpdateAsync(id, category);
@@ -62,7 +62,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
         return Ok(new { message = "Category has been updated", result });
     }
 
-    [HttpDelete("DeleteCategory/{id}")]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCategory(int id)
     {
         var result = await CategoryService.DeleteAsync(id);

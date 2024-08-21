@@ -7,13 +7,13 @@ using Repositories.Interface;
 using Services.Interface;
 
 namespace eStore.Controllers;
-[Route("api/[controller]")]
+[Route("api/product")]
 [ApiController]
 public class ProductController(IProductService service, IMapper mapper) : ControllerBase
 {
     private IProductService ProductService { get; } = service;
     private IMapper Mapper { get; } = mapper;
-    [HttpGet("GetProducts")]
+    [HttpGet]
     public async Task<IActionResult> GetProducts()
     {
         var result = await ProductService.GetAllAsync();
@@ -25,7 +25,7 @@ public class ProductController(IProductService service, IMapper mapper) : Contro
         return Ok(response);
     }
 
-    [HttpGet("GetProductById/{id}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetProductById(int id)
     {
         var result = await ProductService.GetByIdAsync(id);
@@ -38,7 +38,7 @@ public class ProductController(IProductService service, IMapper mapper) : Contro
         return Ok(response);
     }
 
-    [HttpPost("AddProduct")]
+    [HttpPost]
     public async Task<IActionResult> AddProduct([FromBody] ProductRequestDto product)
     {
         var result = await ProductService.AddAsync(product);
@@ -50,7 +50,7 @@ public class ProductController(IProductService service, IMapper mapper) : Contro
         return Ok(result);
     }
 
-    [HttpPut("UpdateProduct/{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductRequestDto product)
     {
         var result = await ProductService.UpdateAsync(id, product);
@@ -62,7 +62,7 @@ public class ProductController(IProductService service, IMapper mapper) : Contro
         return Ok(result);
     }
 
-    [HttpDelete("DeleteProduct/{id}")]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProduct(int id)
     {
         var result = await ProductService.DeleteAsync(id);

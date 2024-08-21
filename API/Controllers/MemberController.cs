@@ -8,14 +8,14 @@ using Services.Interface;
 
 namespace eStore.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/member")]
 [ApiController]
 public class MemberController(IMemberService memberService, IMapper mapper) : ControllerBase
 {
     private IMemberService MemberService { get; } = memberService;
     private IMapper Mapper { get; } = mapper;
     
-    [HttpGet("GetMembers")]
+    [HttpGet]
     public async Task<IActionResult> GetMembers()
     {
         var result = await MemberService.GetAllAsync();
@@ -27,7 +27,7 @@ public class MemberController(IMemberService memberService, IMapper mapper) : Co
         return Ok(response);
     }
     
-    [HttpGet("GetMemberById/{id}")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetMemberById(int id)
     {
         var result = await MemberService.GetByIdAsync(id);
@@ -39,7 +39,7 @@ public class MemberController(IMemberService memberService, IMapper mapper) : Co
         return Ok(response);
     }
     
-    [HttpPost("AddMember")]
+    [HttpPost]
     public async Task<IActionResult> AddMember([FromBody] MemberRequestDto member)
     {
         var entity = Mapper.Map<Member>(member);
@@ -51,7 +51,7 @@ public class MemberController(IMemberService memberService, IMapper mapper) : Co
         return Ok(result);
     }
     
-    [HttpPut("UpdateMember/{id}")]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdateMember(int id, [FromBody] MemberRequestDto member)
     {
         var result = await MemberService.UpdateAsync(id, member);
@@ -62,7 +62,7 @@ public class MemberController(IMemberService memberService, IMapper mapper) : Co
         return Ok(result);
     }
     
-    [HttpDelete("DeleteMember/{id}")]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMember(int id)
     {
         var result = await MemberService.DeleteAsync(id);
