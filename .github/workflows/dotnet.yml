@@ -43,5 +43,6 @@ jobs:
 
     - name: Test
       run: |
-        dotnet test eStore.UnitTests/UnitTests.csproj --no-build
+        dotnet test UnitTests --no-build
+
      
