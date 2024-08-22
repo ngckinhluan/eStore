@@ -58,7 +58,6 @@ public class ProductController(IProductService service, IMapper mapper) : Contro
         {
             return BadRequest();
         }
-
         return Ok(result);
     }
 

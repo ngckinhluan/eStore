@@ -39,10 +39,6 @@ public class Program
             var connectionString = configuration.GetConnectionString("eStore");
             options.UseNpgsql(connectionString);
         });
-
-       
-        
-        
         builder.Logging.AddConsole();
         builder.Services.Configure<ApiBehaviorOptions>(options =>
         {
