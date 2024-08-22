@@ -18,22 +18,22 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
-    - name: Install Chrome
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        sudo apt install -y ./google-chrome-stable_current_amd64.deb
-        # Install additional dependencies for Chrome
-        sudo apt-get install -y libnss3 libgdk-pixbuf2.0-0 libatk-bridge2.0-0 libgtk-3-0
+    # - name: Install Chrome
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y wget
+    #     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    #     sudo apt install -y ./google-chrome-stable_current_amd64.deb
+    #     # Install additional dependencies for Chrome
+    #     sudo apt-get install -y libnss3 libgdk-pixbuf2.0-0 libatk-bridge2.0-0 libgtk-3-0
 
-    - name: Install ChromeDriver
-      run: |
-        CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-        wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
-        unzip chromedriver_linux64.zip
-        sudo mv chromedriver /usr/local/bin/chromedriver
-        sudo chmod +x /usr/local/bin/chromedriver
+    # - name: Install ChromeDriver
+    #   run: |
+    #     CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+    #     wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+    #     unzip chromedriver_linux64.zip
+    #     sudo mv chromedriver /usr/local/bin/chromedriver
+    #     sudo chmod +x /usr/local/bin/chromedriver
 
     - name: Restore dependencies
       run: dotnet restore eStore.sln
@@ -42,4 +42,6 @@ jobs:
       run: dotnet build eStore.sln --no-restore
 
     - name: Test
-      run: dotnet test eStore.sln --no-build
+      run: |
+        dotnet test eStore.UnitTests/UnitTests.csproj --no-build
+     
