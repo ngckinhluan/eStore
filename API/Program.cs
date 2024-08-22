@@ -14,6 +14,7 @@ using Repositories.Implementation;
 using Repositories.Interface;
 using Services.Implementation;
 using Services.Interface;
+using SwaggerThemes;
 using Tools;
 
 namespace eStore;
@@ -24,7 +25,6 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
-
         // Add services to the container.
         builder.Services.AddAuthorization();
         builder.Services.AddControllers();
@@ -39,10 +39,11 @@ public class Program
             var connectionString = configuration.GetConnectionString("eStore");
             options.UseNpgsql(connectionString);
         });
+
+       
         
-        // Add logging
+        
         builder.Logging.AddConsole();
-        
         builder.Services.Configure<ApiBehaviorOptions>(options =>
         {
             options.SuppressModelStateInvalidFilter = true;
@@ -72,7 +73,6 @@ public class Program
         builder.Services.AddAutoMapper(typeof(Program));
 
         #region DAOs
-
         builder.Services.AddScoped<CategoryDao>();
         builder.Services.AddScoped<ProductDao>();
         builder.Services.AddScoped<OrderDao>();
@@ -122,6 +122,11 @@ public class Program
        
 
         var app = builder.Build();
+        #region Swagger Theme
+        app.UseSwagger();
+        app.UseSwaggerThemes(Theme.Monokai);
+        app.UseSwaggerUI();
+        #endregion
         // Configure the HTTP request pipeline.
         var logger = app.Services.GetRequiredService<ILoggerManager>();
         app.UseMiddleware<ExceptionMiddleware>();
@@ -134,14 +139,12 @@ public class Program
             c.RoutePrefix = "swagger";
         });
 
-
         #endregion
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
         app.UseHttpsRedirection();
         app.UseAuthorization();
         app.UseAuthentication();

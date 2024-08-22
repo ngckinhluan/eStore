@@ -61,7 +61,6 @@ public class OrderController(IOrderService orderService, IMapper mapper) : Contr
         {
             return BadRequest(new { error = "Failed to update order!" });
         }
-
         return Ok(result);
     }
 
@@ -73,7 +72,6 @@ public class OrderController(IOrderService orderService, IMapper mapper) : Contr
         {
             return NotFound(new { error = "Order not found!" });
         }
-
         return Ok(new { message = "Order has been deleted!" });
     }
 }
