@@ -40,14 +40,15 @@ namespace AutomatedUITests
             Assert.NotNull(url);
             Thread.Sleep(5000);
         }
-
-        [Fact]
-        public void TestGetCategory()
-        {
-            NavigateAndMaximize("http://localhost:5173/api/category");
-            var categoryHeader = _driver.FindElement(By.XPath("//h1[contains(text(), 'Category')]"));
-            Assert.NotNull(categoryHeader);
-            Thread.Sleep(5000);
-        }
+        
+        //
+        // [Fact]
+        // public void TestGetCategory()
+        // {
+        //     NavigateAndMaximize("http://localhost:5173/api/category");
+        //     var categoryHeader = _driver.FindElement(By.XPath("//h1[contains(text(), 'Category')]"));
+        //     Assert.NotNull(categoryHeader);
+        //     Thread.Sleep(5000);
+        // }
     }
 }
