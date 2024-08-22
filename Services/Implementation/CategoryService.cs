@@ -11,7 +11,7 @@ public class CategoryService(ICategoryRepository categoryRepository, IMapper map
     private ICategoryRepository CategoryRepository { get; } = categoryRepository;
     private IMapper Mapper { get; } = mapper;
 
-    public Task<Category?> AddAsync(CategoryRequestDto entity)
+    public Task<Category?> AddAsync(CategoryRequestDto? entity)
     {
         var category = Mapper.Map<Category>(entity);
         return CategoryRepository.AddAsync(category);

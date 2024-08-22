@@ -46,7 +46,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCategory([FromBody] CategoryRequestDto category)
+    public async Task<IActionResult> CreateCategory([FromBody] CategoryRequestDto? category)
     {
         try
         {

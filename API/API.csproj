@@ -35,10 +35,7 @@
       <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
       <ProjectReference Include="..\Repositories\Repositories.csproj" />
       <ProjectReference Include="..\Services\Services.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="MiddleWare\" />
+      <ProjectReference Include="..\Tools\Tools.csproj" />
     </ItemGroup>
 
 </Project>

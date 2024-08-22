@@ -3,6 +3,7 @@ using BusinessObjects.Context;
 using BusinessObjects.Entities;
 using DAOs;
 using eStore.Extensions;
+using eStore.Middlewares;
 using LoggerService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -115,6 +116,7 @@ public class Program
         var app = builder.Build();
         // Configure the HTTP request pipeline.
         var logger = app.Services.GetRequiredService<ILoggerManager>();
+        app.UseMiddleware<ExceptionMiddleware>();
         app.ConfigureExceptionHandler(logger);
         #region Swagger
         app.UseSwagger();
