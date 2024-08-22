@@ -24,8 +24,10 @@ jobs:
         sudo apt-get install -y wget
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo apt install -y ./google-chrome-stable_current_amd64.deb
+        # Install additional dependencies for Chrome
+        sudo apt-get install -y libnss3 libgdk-pixbuf2.0-0 libatk-bridge2.0-0 libgtk-3-0
 
-   - name: Install ChromeDriver
+    - name: Install ChromeDriver
       run: |
         CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
         wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
