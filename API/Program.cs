@@ -6,6 +6,7 @@ using eStore.Extensions;
 using eStore.Middlewares;
 using LoggerService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NLog;
@@ -13,6 +14,7 @@ using Repositories.Implementation;
 using Repositories.Interface;
 using Services.Implementation;
 using Services.Interface;
+using Tools;
 
 namespace eStore;
 
@@ -26,6 +28,7 @@ public class Program
         // Add services to the container.
         builder.Services.AddAuthorization();
         builder.Services.AddControllers();
+        // builder.Services.AddScoped<ValidationFilterAttribute>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -39,6 +42,11 @@ public class Program
         
         // Add logging
         builder.Logging.AddConsole();
+        
+        builder.Services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
+        });
 
         #region JWT Authenthication
         builder.Services.AddAuthentication(options =>

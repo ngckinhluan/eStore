@@ -61,6 +61,7 @@ public class CategoryController(ICategoryService categoryService, IMapper mapper
                 logger.LogError("Invalid category object sent from client.");
                 return BadRequest("Invalid model object");
             }
+
             // var categoryEntity = mapper.Map<Category>(category);
             var createdCategory = await categoryService.AddAsync(category);
             return CreatedAtRoute("GetCategoryById", new { id = createdCategory?.CategoryId }, createdCategory);
