@@ -10,6 +10,8 @@ Welcome to the eStore repository! This project is an API-based application using
 
 -  The project also implements a **Generic Repository** pattern and uses interfaces such as **ICreateRepository**, **IReadRepository**, **IFindRepository**, **IDeleteRepository** and **IUpdateRepository** to adhere to **SOLID principles.**
 
+- The project also incorporates **Dependency Injection** for better modularity and testability.
+
 ![assignment](./Screenshots/Assignment_01_ASP.NET%20Core%20Web%20API-1.png)
 ![assignment](./Screenshots/Assignment_01_ASP.NET%20Core%20Web%20API-2.png)
 ![assignment](./Screenshots/Assignment_01_ASP.NET%20Core%20Web%20API-3.png)
@@ -24,6 +26,7 @@ Welcome to the eStore repository! This project is an API-based application using
 - **GitHub Actions**: Used for continuous integration and deployment, automating the build, test, and deployment processes.
 - **Selenium**: A framework for automating web browser interactions. It is used to perform end-to-end testing of the web application's UI, ensuring that the application behaves as expected from a user's perspective.
 - **NLog**: A flexible and efficient logging framework used to write log files, providing detailed insights into application behavior and errors for easier debugging and monitoring.
+- **Fluent API**: Utilized for configuring database schema and relationships in a more granular and expressive way, allowing precise control over database mappings and constraints.
 
 
 ## Screenshot
