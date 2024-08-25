@@ -18,7 +18,7 @@ Welcome to the eStore repository! This project is an API-based application using
 ![assignment](./Screenshots/Assignment_01_ASP.NET%20Core%20Web%20API-4.png)
 ![assignment](./Screenshots/Assignment_01_ASP.NET%20Core%20Web%20API-5.png)
 
-### Technology Stack
+## Technology Stack
 
 - **ASP.NET Core**: The framework used to build the API, known for its performance and cross-platform capabilities.
 - **PostgreSQL**: The relational database management system used for data storage and management.
@@ -27,6 +27,17 @@ Welcome to the eStore repository! This project is an API-based application using
 - **Selenium**: A framework for automating web browser interactions. It is used to perform end-to-end testing of the web application's UI, ensuring that the application behaves as expected from a user's perspective.
 - **NLog**: A flexible and efficient logging framework used to write log files, providing detailed insights into application behavior and errors for easier debugging and monitoring.
 - **Fluent API**: Utilized for configuring database schema and relationships in a more granular and expressive way, allowing precise control over database mappings and constraints.
+
+## Built with
+![dotnet]
+
+![csharp]
+
+![jwt]
+
+![testing-lib]
+
+![postgres]
 
 
 ## Screenshot
@@ -96,6 +107,13 @@ For any questions or collaboration, connect with me via email: luantnk2907@gmail
 
 © 2024 luan.tran
 
+[dotnet]:https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white
+[csharp]:https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white
+[azure]:https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white
+[jwt]:https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink
+[sql-server]:https://img.shields.io/badge/Microsoft_SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white
+[testing-lib]:https://img.shields.io/badge/testing%20library-323330?style=for-the-badge&logo=testing-library&logoColor=red
+[postgres]:https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
 
 
 
